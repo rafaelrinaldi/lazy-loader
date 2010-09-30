@@ -3,19 +3,6 @@
 The faster way that I found to load something with ActionScript.
 This is not a complete loading engine, that's why I call "lazy", but you can easily load any kind of file with just a few lines of code.
 
-# Example
-
-/*
-var loader : LazyLoader = new LazyLoader;
-loader.load('http://images.google.com/intl/en_ALL/images/logos/images_logo_lg.gif', {onLoad: placeLogo});
-
-function placeLogo( ...args ) : void {
-	var logo : Bitmap = args[0] as Bitmap;
-	logo.smoothing = true;
-	addChild(logo);
-}
-*/
-
 # To-do
 
 	- Examples: write some examples for each kind of file supported.

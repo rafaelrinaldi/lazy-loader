@@ -6,7 +6,7 @@ This is not a complete loading engine, that's why I call "lazy", but you can eas
 # Example
 
 var loader : LazyLoader = new LazyLoader;
-loader.load("http://images.google.com/intl/en_ALL/images/logos/images_logo_lg.gif", {onLoad: placeLogo});
+loader.load('http://images.google.com/intl/en_ALL/images/logos/images_logo_lg.gif', {onLoad: placeLogo});
 
 function placeLogo( ...args ) : void {
 	var logo : Bitmap = args[0] as Bitmap;

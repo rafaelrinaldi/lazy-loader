@@ -14,7 +14,7 @@
 			stage.scaleMode = "noScale";
 
 			loader = new LazyLoader({onProgress: progressHandler, onLoad: loadHandler});
-			loader.load("the_black_keys.jpg");
+			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/image/the_black_keys.jpg");
 		}
 
 		public function progressHandler( ...args ) : void

@@ -21,7 +21,7 @@
 		public function progressHandler( ...args ) : void
 		{
 			const progressRatio : Number = args[0];
-			trace("Loading image: " + progressRatio * 100 + "%");
+			trace("Loading video: " + progressRatio * 100 + "%");
 		}
 
 		public function loadHandler( ...args ) : void

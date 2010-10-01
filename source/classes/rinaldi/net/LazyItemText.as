@@ -69,7 +69,7 @@ package rinaldi.net
 
 		public function loadCompleteHandler( event : Event ) : void
 		{
-			data = event.target["content"];
+			data = event.target["data"];
 
 		    /** Dispatching the load complete event **/
 		    this.dispatchEvent(new Event(Event.COMPLETE));

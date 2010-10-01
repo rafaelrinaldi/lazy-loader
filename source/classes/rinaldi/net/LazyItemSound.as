@@ -63,7 +63,7 @@ package rinaldi.net
 
 		public function loadCompleteHandler( event : Event ) : void
 		{
-			data = event.target["content"];
+			data = sound;
 
 		    /** Dispatching the load complete event **/
 		    this.dispatchEvent(new Event(Event.COMPLETE));

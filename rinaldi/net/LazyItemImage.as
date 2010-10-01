@@ -3,6 +3,7 @@ package rinaldi.net
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLRequest;
 
@@ -24,14 +25,16 @@ package rinaldi.net
 		{
 		}
 
-		override public function load( p_url : String ) : void
+		override public function load( p_url : String, p_noCache : Boolean ) : void
 		{
-		    url = p_url;
+		    super.load(p_url, p_noCache);
 
 		    /** Creating the load proccess **/
-		    loader = new Loader();
+		    loader = new Loader;
 		    loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
-		    loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadCompleteHandler);
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadCompleteHandler);
+			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+
 		    loader.load(new URLRequest(url));
 		}
 
@@ -58,7 +61,7 @@ package rinaldi.net
 		    progressRatio = bytesLoaded / bytesTotal;
 
 		    /** Dispatching a clone of ProgressEvent instance **/
-		    this.dispatchEvent(event.clone());
+		    this.dispatchEvent(event);
 		}
 
 		public function loadCompleteHandler( event : Event ) : void
@@ -66,31 +69,29 @@ package rinaldi.net
 			data = event.target["content"];
 
 		    /** Dispatching the load complete event **/
-		    this.dispatchEvent(new Event(Event.COMPLETE));
+		    this.dispatchEvent(event);
+		}
+
+		public function errorHandler( event : IOErrorEvent ) : void
+		{
+			this.dispatchEvent(event);
 		}
 
 		override public function dispose() : void
 		{
-		    if(loader != null) {
+		    if(loader == null) return;
 
-		        if(loader.contentLoaderInfo.hasEventListener(ProgressEvent.PROGRESS)) {
-		            loader.contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
-		        }
+            loader.contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
+		    loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadCompleteHandler);
+		    loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 
-		        if(loader.contentLoaderInfo.hasEventListener(Event.COMPLETE)) {
-		            loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadCompleteHandler);
-		        }
+		    try {
+		    	loader.close();
+			} catch( error : Error ) {
+		    	// None stream opened
+			}
 
-		        try {
-		            loader.close();
-		        } catch( error : Error ) {
-		            // None stream opened
-		        }
-
-		        loader = null;
-
-		    }
-
+		    loader = null;
 		    data = null;
 		}
 

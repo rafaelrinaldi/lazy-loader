@@ -1,6 +1,7 @@
 package rinaldi.net
 {
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -23,14 +24,15 @@ package rinaldi.net
 		{
 		}
 
-		override public function load( p_url : String ) : void
+		override public function load( p_url : String, p_noCache : Boolean ) : void
 		{
-		    url = p_url;
+		    super.load(p_url, p_noCache);
 
 		    /** Creating the load proccess **/
-		    loader = new URLLoader();
+		    loader = new URLLoader;
 		    loader.addEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
 		    loader.addEventListener(Event.COMPLETE, loadCompleteHandler);
+		    loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 		    loader.load(new URLRequest(url));
 		}
 
@@ -62,7 +64,7 @@ package rinaldi.net
 		    progressRatio = bytesLoaded / bytesTotal;
 
 		    /** Dispatching a clone of ProgressEvent instance **/
-		    this.dispatchEvent(event.clone());
+		    this.dispatchEvent(event);
         }
 
 		public function loadCompleteHandler( event : Event ) : void
@@ -73,28 +75,26 @@ package rinaldi.net
 		    this.dispatchEvent(new Event(Event.COMPLETE));
 		}
 
+		public function errorHandler( event : IOErrorEvent ) : void
+		{
+			this.dispatchEvent(event);
+		}
+
 		override public function dispose() : void
 		{
-		    if(loader != null) {
+		    if(loader == null) return;
 
-		        if(loader.hasEventListener(ProgressEvent.PROGRESS)) {
-		            loader.removeEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
-		        }
+            loader.removeEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
+		    loader.removeEventListener(Event.COMPLETE, loadCompleteHandler);
+		    loader.removeEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 
-		        if(loader.hasEventListener(Event.COMPLETE)) {
-		            loader.removeEventListener(Event.COMPLETE, loadCompleteHandler);
-		        }
-
-		        try {
-		            loader.close();
-		        } catch( error : Error ) {
-		            // None stream opened
-		        }
-
-		        loader = null;
-
+		    try {
+		    	loader.close();
+			} catch( error : Error ) {
+		    	// None stream opened
 		    }
 
+		    loader = null;
 		    data = null;
 		}
 

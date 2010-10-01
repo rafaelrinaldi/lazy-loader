@@ -1,6 +1,7 @@
 package rinaldi.net
 {
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.media.Sound;
 	import flash.net.URLRequest;
@@ -14,7 +15,6 @@ package rinaldi.net
     *
     */
 
-
 	public class LazyItemSound extends LazyItem {
 
         public var sound : Sound;
@@ -23,14 +23,15 @@ package rinaldi.net
 		{
 		}
 
-		override public function load( p_url : String ) : void
+		override public function load( p_url : String, p_noCache : Boolean ) : void
 		{
-		    url = p_url;
+		    super.load(p_url, p_noCache);
 
 		    /** Creating the load proccess **/
-		    sound = new Sound();
+		    sound = new Sound;
 		    sound.addEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
 		    sound.addEventListener(Event.COMPLETE, loadCompleteHandler);
+		    sound.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 		    sound.load(new URLRequest(url));
 		}
 
@@ -57,7 +58,7 @@ package rinaldi.net
 		    progressRatio = bytesLoaded / bytesTotal;
 
 		    /** Dispatching a clone of ProgressEvent instance **/
-		    this.dispatchEvent(event.clone());
+		    this.dispatchEvent(event);
         }
 
 		public function loadCompleteHandler( event : Event ) : void
@@ -68,28 +69,26 @@ package rinaldi.net
 		    this.dispatchEvent(new Event(Event.COMPLETE));
 		}
 
+		public function errorHandler( event : IOErrorEvent ) : void
+		{
+			this.dispatchEvent(event);
+		}
+
 		override public function dispose() : void
 		{
-		    if(sound != null) {
+		    if(sound == null) return;
 
-		        if(sound.hasEventListener(ProgressEvent.PROGRESS)) {
-		            sound.removeEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
-		        }
+			sound.removeEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
+		    sound.removeEventListener(Event.COMPLETE, loadCompleteHandler);
+			sound.removeEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 
-		        if(sound.hasEventListener(Event.COMPLETE)) {
-		            sound.removeEventListener(Event.COMPLETE, loadCompleteHandler);
-		        }
+		    try {
+		    	sound.close();
+			} catch( error : Error ) {
+		    	// None stream opened
+			}
 
-		        try {
-		            sound.close();
-		        } catch( error : Error ) {
-		            // None stream opened
-		        }
-
-		        sound = null;
-
-		    }
-
+		    sound = null;
 		    data = null;
 		}
 

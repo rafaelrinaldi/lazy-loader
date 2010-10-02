@@ -2,12 +2,10 @@
 
 The faster way that I found to load something with ActionScript.
 This is not a complete loading engine, that's why I call "lazy", but you can easily load any kind of file with just a few lines of code.
+Just take a look at the [examples folder][examples_folder].
 
-# To-do
-
-	- Examples: write some examples for each kind of file supported.
-	
 # Contributors
 [Mauro De Tarso][mauro_de_tarso]
 
+[examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master//examples
 [mauro_de_tarso]: http://github.com/maurodetarso

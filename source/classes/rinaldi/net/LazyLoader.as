@@ -28,15 +28,15 @@ package rinaldi.net
         public var item : LazyItem;
         public var items : Dictionary;
 
-        public var noCache : Boolean;
+        public var context : *; // The context can be a instance of LoaderContext or SoundLoaderContext
 
         public var onProgress : Function; // Load progress callback
         public var onLoad : Function; // Load complete callback
         public var onError : Function; // Load error callback
 
         /** Available extensions **/
-        public static const EXTENSIONS_TEXT : Array = [".txt", ".xml", ".json", ".css", ".js", ".php"];
-        public static const EXTENSIONS_SOUND : Array = [".aac", ".aiff", ".mp3", ".avi", ".wav", ".au", ".midi"];
+        public static const EXTENSIONS_TEXT : Array = [".txt", ".xml", ".json", ".css"];
+        public static const EXTENSIONS_SOUND : Array = [".mp3", ".wav", ".midi"];
         public static const EXTENSIONS_IMAGE : Array = [".jpg", ".jpeg", ".png", ".gif", ".bmp"];
         public static const EXTENSIONS_VIDEO : Array = [".flv", ".f4v"];
         public static const EXTENSIONS_MOVIECLIP : Array = [".swf"];
@@ -48,9 +48,9 @@ package rinaldi.net
         public static const TYPE_VIDEO : String = "type_video";
         public static const TYPE_MOVIECLIP : String = "type_movieclip";
 
-		public function LazyLoader( p_callBacks : Object = null, p_noCache : Boolean = false )
+		public function LazyLoader( p_context : * = null )
 		{
-			noCache = p_noCache;
+			context = p_context;
 
 		    /** A dictionary with items supported by the LazyLoader. **/
 		    items = new Dictionary(true);
@@ -59,8 +59,6 @@ package rinaldi.net
 		    items[TYPE_IMAGE] = LazyItemImage;
 		    items[TYPE_VIDEO] = LazyItemVideo;
 		    items[TYPE_MOVIECLIP] = LazyItemMovieClip;
-
-		    setCallBacks(p_callBacks);
 		}
 
 		/**
@@ -71,7 +69,7 @@ package rinaldi.net
 		*   @param                  p_callBacks             A optional parameter with callbacks of file loading.
 		*
 		*/
-		public function load( p_url : String, p_callBacks : Object = null ) : void
+		public function load( p_url : String, p_noCache : Boolean = false ) : void
 		{
 		    var lazyItemClass : Class;
 
@@ -79,22 +77,23 @@ package rinaldi.net
 		    type = typeByURL(url);
 
 		    if(url == null || url == "") {
-		        throw new Error("Invalid file");
+		        trace("[LazyLoader] :: load() :: Invalid file");
+		        return;
 		    }
 
 		    if(type == "") {
-		        throw new Error("Sorry, LazyLoader don't have support for this file type yet");
+		        trace("[LazyLoader] :: load() :: Sorry, LazyLoader doesn't have support for this kind of file.");
+		        return;
 		    }
 
 		    lazyItemClass = items[type];
 
 		    item = new lazyItemClass();
+			item.context = context;
 		    item.addEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
 			item.addEventListener(Event.COMPLETE, loadCompleteHandler);
 			item.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
-		    item.load(url, noCache);
-
-		    setCallBacks(p_callBacks);
+		    item.load(url, p_noCache);
 		}
 
 		public function loadProgressHandler( event : ProgressEvent ) : void
@@ -158,7 +157,6 @@ package rinaldi.net
                 for each(var item : String in p_extensions) {
                     if(item == extension) {
                         return true;
-                        break;
                     }
                 }
 
@@ -166,14 +164,6 @@ package rinaldi.net
             }
 
             return "";
-		}
-
-		public function setCallBacks( p_callBacks : Object ) : void
-		{
-			if(p_callBacks == null) return;
-			if(p_callBacks.hasOwnProperty("onProgress")) onProgress = p_callBacks["onProgress"];
-			if(p_callBacks.hasOwnProperty("onLoad")) onLoad = p_callBacks["onLoad"];
-			if(p_callBacks.hasOwnProperty("onError")) onError = p_callBacks["onError"];
 		}
 
         public function dispose() : void

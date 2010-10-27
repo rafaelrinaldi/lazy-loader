@@ -4,6 +4,7 @@ package rinaldi.net
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.media.Sound;
+	import flash.media.SoundLoaderContext;
 	import flash.net.URLRequest;
 
 	/**
@@ -27,12 +28,17 @@ package rinaldi.net
 		{
 		    super.load(p_url, p_noCache);
 
+		    if(!Boolean(context is SoundLoaderContext)) {
+		    	trace("[LazyItemSound] :: load() :: 'context' parameter must be a SoundLoaderContext instance.");
+		    	return;
+		    }
+
 		    /** Creating the load proccess **/
 		    sound = new Sound;
 		    sound.addEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
 		    sound.addEventListener(Event.COMPLETE, loadCompleteHandler);
 		    sound.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
-		    sound.load(new URLRequest(url));
+		    sound.load(new URLRequest(url), context);
 		}
 
 		override public function getAsSound() : Sound

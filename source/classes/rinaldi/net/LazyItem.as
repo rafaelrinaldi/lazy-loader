@@ -23,6 +23,8 @@ package rinaldi.net
         public var url : String; // File URL
         public var _data : Object; // File data
 
+        public var context : *; // The context can be a instance of LoaderContext or SoundLoaderContext
+
         /** Load progress info **/
         public var bytesLoaded : Number;
         public var bytesTotal : Number;

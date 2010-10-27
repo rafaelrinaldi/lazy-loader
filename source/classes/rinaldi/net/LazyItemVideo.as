@@ -1,8 +1,8 @@
 package rinaldi.net
 {
-	import flash.events.IOErrorEvent;
 	import flash.events.AsyncErrorEvent;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.NetStatusEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.TimerEvent;

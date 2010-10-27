@@ -35,7 +35,7 @@ package rinaldi.net
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadCompleteHandler);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 
-		    loader.load(new URLRequest(url));
+		    loader.load(new URLRequest(url), context);
 		}
 
 		override public function getAsBitmap() : Bitmap

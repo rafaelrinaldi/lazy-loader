@@ -1,5 +1,6 @@
 package rinaldi.net
 {
+	import flash.display.BitmapData;
 	import rinaldi.util.isStandalone;
 
 	import flash.display.Bitmap;
@@ -82,7 +83,14 @@ package rinaldi.net
 			return null;
 		}
 
+		/** Force conversion to Bitmap **/
 		public function getAsBitmap() : Bitmap
+		{
+			return null;
+		}
+
+		/** Force conversion to BitmapData **/
+		public function getAsBitmapData() : BitmapData
 		{
 			return null;
 		}

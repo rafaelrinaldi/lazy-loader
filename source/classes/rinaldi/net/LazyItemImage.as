@@ -1,5 +1,6 @@
 package rinaldi.net
 {
+	import flash.display.BitmapData;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -41,6 +42,11 @@ package rinaldi.net
 		override public function getAsBitmap() : Bitmap
 		{
 			return Bitmap(data);
+		}
+
+		override public function getAsBitmapData() : BitmapData
+		{
+			return Bitmap(data).bitmapData;
 		}
 
 		override public function get data() : Object

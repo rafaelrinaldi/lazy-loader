@@ -34,7 +34,7 @@ package rinaldi.net
         public var onError : Function; // Load error callback
 
         /** Available extensions **/
-        public static const EXTENSIONS_TEXT : Array = [".txt", ".xml", ".json", ".css"];
+        public static const EXTENSIONS_TEXT : Array = [".txt", ".xml", ".json"];
         public static const EXTENSIONS_SOUND : Array = [".mp3", ".wav", ".midi"];
         public static const EXTENSIONS_IMAGE : Array = [".jpg", ".jpeg", ".png", ".gif", ".bmp"];
         public static const EXTENSIONS_VIDEO : Array = [".flv", ".f4v"];
@@ -65,7 +65,7 @@ package rinaldi.net
 		*   Starts the loading process.
 		*
 		*   @param                  p_url                  File URL.
-		*   @param                  p_noCache             	Previne cache?
+		*   @param                  p_noCache             	Prevent cache?
 		*
 		*/
 		public function load( p_url : String, p_noCache : Boolean = false ) : void

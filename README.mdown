@@ -21,7 +21,7 @@ Basically for all the callbacks (`onProgress`, `onLoad` and `onError`) you will 
 
 - `onProgress` - A `Number` parameter is passed with the progress ratio of the loading process.
 - `onLoad` - A `Object` parameter is passed with the data of the loading item. You can type this value as well, like in the example below.
-- `onError` - A `ErrorEvent` instance is passed.
+- `onError` - A `IOErrorEvent` instance is passed.
 	
 ### Context ###
 

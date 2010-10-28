@@ -75,7 +75,7 @@ Basic way to load a file with **lazy-loader**:
 	loader.load("http://yourserver.com/yourfile.ext");
 	
 	/*
-	loader.load("http://yourserver.com/yourfile.ext", true); // If you want to prevent the cache you can do this way (just setting 'true' to 'noCache' parameter)
+	loader.load("http://yourserver.com/yourfile.ext", true); // If you want to prevent the cache you can do this way (just setting 'true' to 'p_noCache' parameter)
 	*/
 
 	function onProgress( p_progressRatio : Number ) : void {

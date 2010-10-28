@@ -1,16 +1,68 @@
+[examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master//examples
+
 # lazy-loader #
 
 The faster way that I found to load something with ActionScript.
 This is not a complete loading engine, that's why I call "lazy", but you can easily load any kind of file with just a few lines of code.
-Just take a look at the [examples folder][examples_folder].
 
-[examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master//examples
+## Notes ##
 
+### Supported extensions ###
+
+- **Text** - *txt*, *xml* and *json*.
+- **Sound** - *mp3*, *wav* and *midi*.
+- **Image** - *jpg*, *jpeg*, *png*, *gif* and *bmp*.
+- **Video** - *flv* and *.f4v*.
+- **Movie clip** - *swf*.
+
+### Callbacks ###
+
+Basically for all the callbacks (`onProgress`, `onLoad` and `onError`) you will receive a parameter:
+
+- `onProgress` - A `Number` parameter is passed with the progress ratio of the loading process.
+- `onLoad` - A `Object` parameter is passed with the data of the loading item. You can type this value as well, like in the example below.
+- `onError` - A `ErrorEvent` instance is passed.
+	
+### Context ###
+
+You can set the loader context in the constructor of **lazy-loader** and this must be `LoaderContext` or `SoundLoaderContext` instance. Here is an example ("ext" means "extension"):
+
+	import flash.system.LoaderContext;
+	import flash.media.SoundLoaderContext;
+	
+	import rinaldi.net.LazyLoader;
+	
+	var loader : LazyLoader = new LazyLoader(new LoaderContext);
+	loader.context = new SoundLoaderContext; // If you want to change/set after instantiate the LazyLoader object, you can do this way.
+	loader.load("http://yourserver.com/yourfile.ext");
+	
+### Cache control ###
+
+It's really easy to prevent cache with **lazy-loader**, you just need to pass a boolean value to `load()` method saying if you want it or not.
+This feature is disabled by default and will not work if the swf is running on a standalone player.
+
+	import rinaldi.net.LazyLoader;
+	
+	var loader : LazyLoader = new LazyLoader;
+	loader.load("http://yourserver.com/yourfile.ext", true); // This flag
+
+### Data conversion ###
+
+Instead of just get the `data` property (that is a `Object` instance), you can get the data already typed accessing a method in the property `item`. The available methods to do that are:
+
+- `getAsText()` - Return as a `String` object.
+- `getAsXML()` - Return as a `XML` object.
+- `getAsSound()` - Return as a `Sound` object.
+- `getAsBitmap()` - Return as a `Bitmap` object.
+- `getAsBitmapData()` - Return as a `BitmapData` object.
+- `getAsNetStream()` - Return as a `NetStream` object.
+- `getAsMovieClip()` - Return as a `MovieClip` object.
+	
 ## Usage ##
 
-Basic way to load an image with **lazy-loader**:
+Basic way to load a file with **lazy-loader**:
 
-### Image loading ###
+### File loading ###
 	
 	import flash.display.Bitmap;
 	
@@ -20,25 +72,22 @@ Basic way to load an image with **lazy-loader**:
 	loader.onProgress = onProgress;
 	loader.onLoad = onLoad;
 	loader.onError = onError;
-	loader.load("http://yourserver.com/yourimage.jpg");
+	loader.load("http://yourserver.com/yourfile.ext");
 	
 	/*
-	loader.load("http://yourserver.com/yourimage.jpg", true); // If you want to prevent the cache you can do this way (just setting 'true' to 'noCache' parameter)
+	loader.load("http://yourserver.com/yourfile.ext", true); // If you want to prevent the cache you can do this way (just setting 'true' to 'noCache' parameter)
 	*/
 
 	function onProgress( p_progressRatio : Number ) : void {
 		trace(p_progressRatio * 100 + "%");
 	}
 
-	function onLoad( p_data : Bitmap ) : void {
-		
-		addChild(p_data);
-		
-		/*
-		addChild(loader.item.getAsBitmap()); // You also can do this way
-		*/
+	function onLoad( p_data : Type ) : void {
+		trace("Your file is loaded!", p_data);
 	}
 
 	function onError() : void {
 		trace("Ops!");
 	}
+
+You can find more examples at the [examples folder][examples_folder].

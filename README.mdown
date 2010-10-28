@@ -16,7 +16,7 @@ Basic way to load an image with **lazy-loader**:
 	
 	import rinaldi.net.LazyLoader;
 	
-	var loader : LazyLoader = new LazyLoader;
+	var loader : LazyLoader = new LazyLoader; // You can set the loader context here on the constructor
 	loader.onProgress = onProgress;
 	loader.onLoad = onLoad;
 	loader.onError = onError;

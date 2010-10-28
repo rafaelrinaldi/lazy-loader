@@ -1,4 +1,4 @@
-[examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master//examples
+[examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master/examples
 
 # lazy-loader #
 

@@ -1,7 +1,44 @@
-# lazy-loader
+# lazy-loader #
 
 The faster way that I found to load something with ActionScript.
 This is not a complete loading engine, that's why I call "lazy", but you can easily load any kind of file with just a few lines of code.
 Just take a look at the [examples folder][examples_folder].
 
 [examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master//examples
+
+## Usage ##
+
+Basic way to load an image with **lazy-loader**:
+
+### Image loading ###
+	
+	import flash.display.Bitmap;
+	
+	import rinaldi.net.LazyLoader;
+	
+	var loader : LazyLoader = new LazyLoader;
+	loader.onProgress = onProgress;
+	loader.onLoad = onLoad;
+	loader.onError = onError;
+	loader.load("http://yourserver.com/yourimage.jpg");
+	
+	/*
+	loader.load("http://yourserver.com/yourimage.jpg", true); // If you want to prevent the cache you can do this way (just setting 'true' to 'noCache' parameter)
+	*/
+
+	function onProgress( p_progressRatio : Number ) : void {
+		trace(p_progressRatio * 100 + "%");
+	}
+
+	function onLoad( p_data : Bitmap ) : void {
+		
+		addChild(p_data);
+		
+		/*
+		addChild(loader.item.getAsBitmap()); // You also can do this way
+		*/
+	}
+
+	function onError() : void {
+		trace("Ops!");
+	}

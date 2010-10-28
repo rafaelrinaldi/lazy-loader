@@ -52,10 +52,10 @@ package rinaldi.net
 
 		/**
 		 *
-		 * Apply the 'noCache' param with random value to the URL.
+		 * Apply the 'noCache' param with random value to the file URL.
 		 *
-		 * @param					p_url					URL to be treated.
-		 * @return											A url with the 'noCache' param applyed.
+		 * @param					p_url					File URL.
+		 * @return											File URL with 'noCache' param applied.
 		 *
 		 */
 		public function noCacheURL( p_url : String ) : String
@@ -64,16 +64,19 @@ package rinaldi.net
 			return p_url.concat("?noCache=" + String(Math.random() * getTimer() * 1000).split(".").join(""));
 		}
 
+		/** Force conversion to String **/
 		public function getAsText() : String
 		{
 			return null;
 		}
 
+		/** Force conversion to XML **/
 		public function getAsXML() : XML
 		{
 			return null;
 		}
 
+		/** Force conversion to Sound **/
 		public function getAsSound() : Sound
 		{
 			return null;
@@ -84,11 +87,13 @@ package rinaldi.net
 			return null;
 		}
 
+		/** Force conversion to NetStream **/
 		public function getAsNetStream() : NetStream
 		{
 			return null;
 		}
 
+		/** Force conversion to MovieClip **/
 		public function getAsMovieClip() : MovieClip
 		{
 			return null;
@@ -109,7 +114,7 @@ package rinaldi.net
 
 		override public function toString() : String
 		{
-		    return "[LazyItem]";
+			return "";
 		}
 
 	}

@@ -10,8 +10,7 @@ package rinaldi.net
 	/**
 	*
     *	Lazy loader for basic file types.
-    *	The intention of this class does not load a queue of files, also does not load many files at the same time.
-    *	LazyLoader it's only the best way I found to load basic file types in ActionScript 3.0.
+    *	http://github.com/rafaelrinaldi/lazy-loader
     *
     *	@see rinaldi.net
     *
@@ -25,7 +24,7 @@ package rinaldi.net
         public var url : String; // File URL
         public var type : String; // File Type
 
-        public var item : LazyItem;
+        public var item : LazyItem; // Item istance
         public var items : Dictionary;
 
         public var context : *; // The context can be a instance of LoaderContext or SoundLoaderContext
@@ -63,10 +62,10 @@ package rinaldi.net
 
 		/**
 		*
-		*   Starts the file loading.
+		*   Starts the loading process.
 		*
-		*   @param                  p_url                   File URL.
-		*   @param                  p_callBacks             A optional parameter with callbacks of file loading.
+		*   @param                  p_url                  File URL.
+		*   @param                  p_noCache             	Previne cache?
 		*
 		*/
 		public function load( p_url : String, p_noCache : Boolean = false ) : void
@@ -77,7 +76,7 @@ package rinaldi.net
 		    type = typeByURL(url);
 
 		    if(url == null || url == "") {
-		        trace("[LazyLoader] :: load() :: Invalid file");
+		        trace("[LazyLoader] :: load() :: Invalid file.");
 		        return;
 		    }
 
@@ -88,6 +87,7 @@ package rinaldi.net
 
 		    lazyItemClass = items[type];
 
+			/** Creating the item **/
 		    item = new lazyItemClass();
 			item.context = context;
 		    item.addEventListener(ProgressEvent.PROGRESS, loadProgressHandler);
@@ -120,7 +120,7 @@ package rinaldi.net
 
 		/**
 		*
-		*   Returns the type of file based on his URL.
+		*   Returns the type of file based on a URL.
 		*
 		*   @param                  p_url                   File URL.
 		*
@@ -145,11 +145,11 @@ package rinaldi.net
 
             /**
             *
-            *   Checks if current extension is an available extension.
+            *   Checking if is an available extension.
             *
-            *   @param                  p_arr                   Extensions array.
+            *   @param                  p_arr                   Extensions.
             *
-            *   @return                                         "true" if current extension is an available extension, "false" otherwise.
+            *   @return                                         Returns "true" if the current extension is available otherwise returns "false".
             *
             */
             function isExtensionOf( p_extensions : Array ) : Boolean {

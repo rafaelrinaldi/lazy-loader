@@ -60,7 +60,6 @@ package rinaldi.net
 		    bytesTotal = event.bytesTotal;
 		    progressRatio = bytesLoaded / bytesTotal;
 
-		    /** Dispatching a clone of ProgressEvent instance **/
 		    this.dispatchEvent(event);
 		}
 
@@ -68,7 +67,6 @@ package rinaldi.net
 		{
 			data = event.target["content"];
 
-		    /** Dispatching the load complete event **/
 		    this.dispatchEvent(event);
 		}
 
@@ -85,6 +83,7 @@ package rinaldi.net
 		    loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadCompleteHandler);
 		    loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 
+			// Try to close the Loader instance
 		    try {
 		    	loader.close();
 			} catch( error : Error ) {

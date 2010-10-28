@@ -63,7 +63,6 @@ package rinaldi.net
 		    bytesTotal = event.bytesTotal;
 		    progressRatio = bytesLoaded / bytesTotal;
 
-		    /** Dispatching a clone of ProgressEvent instance **/
 		    this.dispatchEvent(event);
         }
 
@@ -71,7 +70,6 @@ package rinaldi.net
 		{
 			data = sound;
 
-		    /** Dispatching the load complete event **/
 		    this.dispatchEvent(new Event(Event.COMPLETE));
 		}
 
@@ -88,7 +86,8 @@ package rinaldi.net
 		    sound.removeEventListener(Event.COMPLETE, loadCompleteHandler);
 			sound.removeEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 
-		    try {
+			// Try to close the Sound instance
+			try {
 		    	sound.close();
 			} catch( error : Error ) {
 		    	// None stream opened

@@ -48,7 +48,7 @@ package rinaldi.net
             stream.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
             stream.play(url);
 
-            /** A dummy render to get the load progress and load complete states **/
+            /** A dummy check to get the load progress and load complete states **/
             timer = new Timer(250);
             timer.addEventListener(TimerEvent.TIMER, timerHandler);
             timer.start();
@@ -56,7 +56,7 @@ package rinaldi.net
 
 		/**
 		*
-		*   Removing the dummy render.
+		*   Removing the dummy check.
 		*
 		*/
 		public function removeTimer() : void
@@ -91,19 +91,13 @@ package rinaldi.net
 		    progressRatio = bytesLoaded / bytesTotal;
 
 		    if(bytesLoaded >= bytesTotal) {
-
 		        removeTimer();
-
 		        data = stream;
-
-		        /** Dispatching the load complete event **/
 		        this.dispatchEvent(new Event(Event.COMPLETE));
 
 		        return;
-
 		    }
 
-		    /** Dispatching a clone of ProgressEvent instance **/
 		    progressEvent = new ProgressEvent(ProgressEvent.PROGRESS);
 		    progressEvent.bytesLoaded = bytesLoaded;
 		    progressEvent.bytesTotal = bytesTotal;
@@ -133,6 +127,7 @@ package rinaldi.net
             stream.removeEventListener(AsyncErrorEvent.ASYNC_ERROR, asyncErrorHandler);
             stream.removeEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 
+			// Try to close the NetStream instance
 			try {
             	stream.close();
 			} catch( error : Error ) {
@@ -180,7 +175,7 @@ class CustomClient {
     *   @param                  info                    Meta-data info.
     *
     */
-    public function onMetaData( info : Object ) : void
+    public function onMetaData( p_info : Object = null ) : void
     {
     }
 
@@ -191,7 +186,7 @@ class CustomClient {
     *   @param                  info                    Cue-point info.
     *
     */
-    public function onCuePoint( info : Object ) : void
+    public function onCuePoint( p_info : Object = null ) : void
     {
     }
 

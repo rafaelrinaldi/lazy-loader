@@ -12,7 +12,7 @@ This is not a complete loading engine, that's why I call "lazy", but you can eas
 - **Text** - *txt*, *xml* and *json*.
 - **Sound** - *mp3*, *wav* and *midi*.
 - **Image** - *jpg*, *jpeg*, *png*, *gif* and *bmp*.
-- **Video** - *flv* and *.f4v*.
+- **Video** - *flv* and *f4v*.
 - **Movie clip** - *swf*.
 
 ### Callbacks ###

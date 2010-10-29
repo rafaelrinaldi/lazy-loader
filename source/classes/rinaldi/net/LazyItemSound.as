@@ -28,7 +28,7 @@ package rinaldi.net
 		{
 		    super.load(p_url, p_noCache);
 
-		    if(!Boolean(context is SoundLoaderContext)) {
+		    if(context != null && !Boolean(context is SoundLoaderContext)) {
 		    	trace("[LazyItemSound] :: load() :: 'context' parameter must be a SoundLoaderContext instance.");
 		    	return;
 		    }

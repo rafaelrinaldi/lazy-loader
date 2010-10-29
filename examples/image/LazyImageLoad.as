@@ -2,6 +2,7 @@
 {
 	import flash.display.MovieClip;
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	
 	import rinaldi.net.LazyLoader;
 	
@@ -13,20 +14,27 @@
 		{
 			stage.scaleMode = "noScale";
 
-			loader = new LazyLoader({onProgress: progressHandler, onLoad: loadHandler});
+			loader = new LazyLoader;
+			loader.onProgress = onProgress;
+			loader.onLoad = onLoad;
 			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/image/the_black_keys.jpg");
 		}
 
-		public function progressHandler( ...args ) : void
+		public function onProgress( p_progressRatio : Number ) : void
 		{
-			const progressRatio : Number = args[0];
-			trace("Loading image: " + progressRatio * 100 + "%");
+			trace("Loading image...", p_progressRatio * 100);
 		}
-
-		public function loadHandler( ...args ) : void
+		
+		public function onLoad( p_bitmap : Bitmap ) : void
 		{
-			const image : Bitmap = args[0];
-			addChild(image);
+			addChild(p_bitmap); // Adding the Bitmap instance to stage.
+			 
+		   	/*
+			You also can do this way:
+			addChild(loader.item.getAsBitmap());
+			*/
+			
+			trace("The BitmapData from my Bitmap is", loader.item.getAsBitmapData());
 		}
 	}
 }

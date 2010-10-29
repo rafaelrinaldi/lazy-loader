@@ -14,22 +14,23 @@
 		{
 			stage.scaleMode = "noScale";
 
-			loader = new LazyLoader({onProgress: progressHandler, onLoad: loadHandler});
-			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/sound/minha_menina.mp3");
+			loader = new LazyLoader;
+			loader.onProgress = onProgress;
+			loader.onLoad = onLoad;
+			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/sound/here_today_gone_tomorrow.mp3");
 		}
 
-		public function progressHandler( ...args ) : void
+		public function onProgress( p_progressRatio : Number ) : void
 		{
-			const progressRatio : Number = args[0];
-			trace("Loading image: " + progressRatio * 100 + "%");
+			trace("Loading sound...", p_progressRatio * 100);
 		}
 
-		public function loadHandler( ...args ) : void
+		public function onLoad( p_sound : Sound ) : void
 		{
-			const sound : Sound = loader.item.getAsSound();
-
+			trace("Ramones is awesome!");
+			
 			var channel : SoundChannel = new SoundChannel;
-			channel = sound.play();
+			channel = p_sound.play();
 		}
 	}
 }

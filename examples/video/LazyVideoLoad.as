@@ -14,22 +14,21 @@
 		{
 			stage.scaleMode = "noScale";
 
-			loader = new LazyLoader({onProgress: progressHandler, onLoad: loadHandler});
+			loader = new LazyLoader;
+			loader.onProgress = onProgress;
+			loader.onLoad = onLoad;
 			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/video/pqp.flv");
 		}
 
-		public function progressHandler( ...args ) : void
+		public function onProgress( p_progressRatio : Number ) : void
 		{
-			const progressRatio : Number = args[0];
-			trace("Loading video: " + progressRatio * 100 + "%");
+			trace("Loading video...", p_progressRatio * 100);
 		}
 
-		public function loadHandler( ...args ) : void
+		public function onLoad( p_stream : NetStream ) : void
 		{
-			const stream : NetStream = args[0];
-			
 			var video : Video = new Video(640, 480);
-			video.attachNetStream(stream);
+			video.attachNetStream(p_stream);
 			addChild(video);
 		}
 	}

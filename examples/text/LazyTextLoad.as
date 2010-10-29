@@ -12,20 +12,20 @@
 		{
 			stage.scaleMode = "noScale";
 
-			loader = new LazyLoader({onProgress: progressHandler, onLoad: loadHandler});
+			loader = new LazyLoader;
+			loader.onProgress = onProgress;
+			loader.onLoad = onLoad;
 			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/text/info.xml");
 		}
 
-		public function progressHandler( ...args ) : void
+		public function onProgress( p_progressRatio : Number ) : void
 		{
-			const progressRatio : Number = args[0];
-			trace("Loading image: " + progressRatio * 100 + "%");
+			trace("Loading XML file...", p_progressRatio * 100);
 		}
 
-		public function loadHandler( ...args ) : void
+		public function onLoad( p_string : String ) : void
 		{
-			const xml : XML = loader.item.getAsXML();
-			trace(xml);
+			trace(loader.item.getAsXML());
 		}
 	}
 }

@@ -17,7 +17,7 @@
 			loader = new LazyLoader;
 			loader.onProgress = onProgress;
 			loader.onLoad = onLoad;
-			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/sound/here_today_gone_tomorrow.mp3");
+			loader.load("http://misc.rafaelrinaldi.com/github/lazy-loader/examples/sound/here_today_gone_tomorrow.mp3");
 		}
 
 		public function onProgress( p_progressRatio : Number ) : void

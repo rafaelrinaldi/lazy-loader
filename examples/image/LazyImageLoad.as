@@ -17,7 +17,7 @@
 			loader = new LazyLoader;
 			loader.onProgress = onProgress;
 			loader.onLoad = onLoad;
-			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/image/the_black_keys.jpg");
+			loader.load("http://misc.rafaelrinaldi.com/github/lazy-loader/examples/image/the_black_keys.jpg");
 		}
 
 		public function onProgress( p_progressRatio : Number ) : void

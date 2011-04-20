@@ -17,7 +17,7 @@
 			loader = new LazyLoader;
 			loader.onProgress = onProgress;
 			loader.onLoad = onLoad;
-			loader.load("http://www.rafaelrinaldi.com/github/lazy-loader/examples/video/pqp.flv");
+			loader.load("http://misc.rafaelrinaldi.com/github/lazy-loader/examples/video/p73.flv");
 		}
 
 		public function onProgress( p_progressRatio : Number ) : void

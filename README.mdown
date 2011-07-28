@@ -35,7 +35,7 @@ You can set the loader context in the constructor of **lazy-loader** and this mu
 	import flash.system.LoaderContext;
 	import flash.media.SoundLoaderContext;
 	
-	import rinaldi.net.LazyLoader;
+	import com.rafaelrinaldi.net.LazyLoader;
 	
 	var loader : LazyLoader = new LazyLoader(new LoaderContext);
 	loader.context = new SoundLoaderContext; // If you want to change/set after instantiate the LazyLoader object, you can do this way.
@@ -46,7 +46,7 @@ You can set the loader context in the constructor of **lazy-loader** and this mu
 It's really easy to prevent cache with **lazy-loader**, you just need to pass a boolean value to `load()` method saying if you want it or not.
 This feature is disabled by default and will not work if the swf is running on a standalone player.
 
-	import rinaldi.net.LazyLoader;
+	import com.rafaelrinaldi.net.LazyLoader;
 	
 	var loader : LazyLoader = new LazyLoader;
 	loader.load("http://yourserver.com/yourfile.ext", true); // This flag
@@ -67,7 +67,7 @@ Instead of just get the `data` property (that is a `Object` instance), you can g
 
 	import flash.display.Bitmap;
 	
-	import rinaldi.net.LazyLoader;
+	import com.rafaelrinaldi.net.LazyLoader;
 	
 	var loader : LazyLoader = new LazyLoader; // You can set the loader context here on the constructor
 	loader.onProgress = onProgress;

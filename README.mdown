@@ -1,9 +1,12 @@
+[asdoc]: http://github.com/rafaelrinaldi/lazy-loader/tree/master/examples
+[license]: http://github.com/rafaelrinaldi/lazy-loader/blob/master/license.txt
 [examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master/examples
 
 # lazy-loader #
 
 The faster way that I found to load something with ActionScript.
 This is not a complete loading engine, that's why I call "lazy", but you can easily load any kind of file with just a few lines of code.
+The mainly reason for what I've created **lazy-loader** was to learn about different kinds of loading existing in ActionScript.
 
 ## Features ##
 
@@ -60,10 +63,6 @@ Instead of just get the `data` property (that is a `Object` instance), you can g
 	
 ## Usage ##
 
-Basic way to load a file with **lazy-loader**:
-
-### File loading ###
-	
 	import flash.display.Bitmap;
 	
 	import rinaldi.net.LazyLoader;
@@ -90,4 +89,8 @@ Basic way to load a file with **lazy-loader**:
 		trace("Ops!");
 	}
 
-You can find more examples at the [examples folder][examples_folder].
+Check the [examples][examples_folder].
+For a complete code reference, check the [documentation][asdoc].
+
+## License ##
+[WTFPL][license]

@@ -4,7 +4,7 @@
 	import flash.media.Video;
 	import flash.net.NetStream;
 	
-	import rinaldi.net.LazyLoader;
+	import com.rafaelrinaldi.net.LazyLoader;
 	
 	public class LazyVideoLoad extends MovieClip
 	{

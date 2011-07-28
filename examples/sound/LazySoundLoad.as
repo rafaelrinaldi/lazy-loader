@@ -4,7 +4,7 @@
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	
-	import rinaldi.net.LazyLoader;
+	import com.rafaelrinaldi.net.LazyLoader;
 	
 	public class LazySoundLoad extends MovieClip
 	{

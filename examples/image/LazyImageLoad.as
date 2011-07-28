@@ -4,7 +4,7 @@
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	
-	import rinaldi.net.LazyLoader;
+	import com.rafaelrinaldi.net.LazyLoader;
 	
 	public class LazyImageLoad extends MovieClip
 	{

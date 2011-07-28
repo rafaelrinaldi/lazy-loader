@@ -2,7 +2,7 @@
 {
 	import flash.display.MovieClip;
 	
-	import rinaldi.net.LazyLoader;
+	import com.rafaelrinaldi.net.LazyLoader;
 	
 	public class LazyTextLoad extends MovieClip
 	{

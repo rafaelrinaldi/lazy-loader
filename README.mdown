@@ -9,7 +9,7 @@ The faster way that I found to load something with ActionScript.
 This is not a complete loading engine, that's why I call "lazy", but you can easily load any kind of file with just a few lines of code.
 
 The mainly reason for what I've created **lazy-loader** was to learn about different kinds of loading existing in ActionScript.
-___
+
 ## Features
 
 ### Supported extensions
@@ -63,7 +63,6 @@ Instead of just get the `data` property (that is a `Object` instance), you can g
 - `getAsNetStream()` - Return as a `NetStream` object.
 - `getAsMovieClip()` - Return as a `MovieClip` object.
 
-___
 ## Usage
 
 	import flash.display.Bitmap;
@@ -96,6 +95,5 @@ Check the [examples][examples_folder].
 
 For a complete code reference, check the [documentation][asdoc].
 
-___
 ## License
 [WTFPL][license]

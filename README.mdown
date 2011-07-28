@@ -2,15 +2,17 @@
 [license]: http://github.com/rafaelrinaldi/lazy-loader/blob/master/license.txt
 [examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master/examples
 
-# lazy-loader #
+# lazy-loader
 
 The faster way that I found to load something with ActionScript.
+
 This is not a complete loading engine, that's why I call "lazy", but you can easily load any kind of file with just a few lines of code.
+
 The mainly reason for what I've created **lazy-loader** was to learn about different kinds of loading existing in ActionScript.
+___
+## Features
 
-## Features ##
-
-### Supported extensions ###
+### Supported extensions
 
 - **Text** - *txt*, *xml* and *json*.
 - **Sound** - *mp3*, *wav* and *midi*.
@@ -18,7 +20,7 @@ The mainly reason for what I've created **lazy-loader** was to learn about diffe
 - **Video** - *flv* and *f4v*.
 - **Movie clip** - *swf*.
 
-### Callbacks ###
+### Callbacks
 
 Basically for all the callbacks (`onProgress`, `onLoad` and `onError`) you will receive a parameter:
 
@@ -26,7 +28,7 @@ Basically for all the callbacks (`onProgress`, `onLoad` and `onError`) you will 
 - `onLoad` - A `Object` parameter is passed with the data of the loading item. You can type this value as well, like in the example below.
 - `onError` - A `IOErrorEvent` instance is passed.
 	
-### Context ###
+### Context
 
 You can set the loader context in the constructor of **lazy-loader** and this must be `LoaderContext` or `SoundLoaderContext` instance. Here is an example ("ext" means "extension"):
 
@@ -39,7 +41,7 @@ You can set the loader context in the constructor of **lazy-loader** and this mu
 	loader.context = new SoundLoaderContext; // If you want to change/set after instantiate the LazyLoader object, you can do this way.
 	loader.load("http://yourserver.com/yourfile.ext");
 	
-### Cache control ###
+### Cache control
 
 It's really easy to prevent cache with **lazy-loader**, you just need to pass a boolean value to `load()` method saying if you want it or not.
 This feature is disabled by default and will not work if the swf is running on a standalone player.
@@ -49,7 +51,7 @@ This feature is disabled by default and will not work if the swf is running on a
 	var loader : LazyLoader = new LazyLoader;
 	loader.load("http://yourserver.com/yourfile.ext", true); // This flag
 
-### Data conversion ###
+### Data conversion
 
 Instead of just get the `data` property (that is a `Object` instance), you can get the data already typed accessing a method in the property `item`. The available methods to do that are:
 
@@ -60,8 +62,9 @@ Instead of just get the `data` property (that is a `Object` instance), you can g
 - `getAsBitmapData()` - Return as a `BitmapData` object.
 - `getAsNetStream()` - Return as a `NetStream` object.
 - `getAsMovieClip()` - Return as a `MovieClip` object.
-	
-## Usage ##
+
+___
+## Usage
 
 	import flash.display.Bitmap;
 	
@@ -90,7 +93,9 @@ Instead of just get the `data` property (that is a `Object` instance), you can g
 	}
 
 Check the [examples][examples_folder].
+
 For a complete code reference, check the [documentation][asdoc].
 
-## License ##
+___
+## License
 [WTFPL][license]

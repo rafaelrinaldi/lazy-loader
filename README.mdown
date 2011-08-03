@@ -1,4 +1,4 @@
-[asdoc]: https://github.com/rafaelrinaldi/lazy-loader/tree/master/asdoc
+[asdoc]: http://rafaelrinaldi.github.com/lazy-loader/asdoc
 [license]: http://github.com/rafaelrinaldi/lazy-loader/blob/master/license.txt
 [examples_folder]: http://github.com/rafaelrinaldi/lazy-loader/tree/master/examples
 

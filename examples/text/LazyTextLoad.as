@@ -15,7 +15,7 @@
 			loader = new LazyLoader;
 			loader.onProgress = onProgress;
 			loader.onLoad = onLoad;
-			loader.load("http://rafaelrinaldi.github.com/button/examples/text/info.xml");
+			loader.load("http://rafaelrinaldi.github.com/lazy-loader/examples/text/info.xml");
 		}
 
 		public function onProgress( p_progressRatio : Number ) : void

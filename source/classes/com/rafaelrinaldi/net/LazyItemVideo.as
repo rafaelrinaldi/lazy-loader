@@ -52,7 +52,6 @@ package com.rafaelrinaldi.net
             stream.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
             stream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, asyncErrorHandler);
             stream.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
-            stream.play(url);
 
             /** A dummy check to get the load progress and load complete states. **/
             timer = new Timer(250);
@@ -97,6 +96,7 @@ package com.rafaelrinaldi.net
 
 		    if(bytesLoaded >= bytesTotal) {
 		        removeTimer();
+				stream.play(url);
 		        data = stream;
 		        this.dispatchEvent(new Event(Event.COMPLETE));
 
